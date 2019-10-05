@@ -1,0 +1,38 @@
+<h2>Products</h2>
+<% if (!productsList.length) { %>
+    <p>No products found</p>
+<% } else { %>
+    <table id="productsList">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Exchange Price</th>
+                <th>Status</th>
+                <th>Posted At</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% productsList.forEach((product) => { %>
+                <tr>
+                    <td><%- product.name %></td>
+                    <td><%- product.description %></td>
+                    <td><%- product.exchangePrice %></td>
+                    <td><%- product.status %></td>
+                    <td><%- product.createdAt %></td>
+                    <td><a href="<%- editProductPath(product) %>">Edit</a></td>
+                    <td>
+                        <form action="<%- deleteProductPath(product) %>" method="POST">
+                            <input type="hidden" name="_method" value="delete"/>
+                            <input type="submit" value="Delete"/>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+<% } %>
+
+<p><a href="<%- userProfilePath %>">Back to profile</a></p>
+<p><a href="<%- newProductPath %>">New product</a></p>

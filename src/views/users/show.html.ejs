@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>Show user</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="<%= assetPath('navBar.scss') %>">
+  </head>
+
+  <body>
+        <h2>User info</h2>
+        <% if (!user) { %>
+            <p>User not found</p>
+        <% } else { %>
+            <table id="user">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Adress</th>
+                        <th>Phone Number</th>
+                        <th>Reputation</th>
+                        <th colspan="2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <td><%- user.name %></td>
+                            <td><%- user.username %></td>
+                            <td><%- user.email %></td>
+                            <td><%- user.adress %></td>
+                            <td><%- user.phoneNumber %></td>
+                            <td><%- user.reputation %></td>
+                            <td><a href="<%- editUserPath(user) %>">Edit</a></td>
+                            <td>
+                                <form action="<%- deleteUserPath(user) %>" method="POST">
+                                    <input type="hidden" name="_method" value="delete"/>
+                                    <input type = "submit" value="Delete"/>
+                                </form>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+        <% } %>
+  </body>
+
+    <p><a href="<%- publicationsListPath %>">User's publications</a></p>
+    <p><a href="<%- productsListPath %>">User's products</a></p>
+
+
+</html>

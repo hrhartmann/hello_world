@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>Publications</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="<%= assetPath('navBar.scss') %>">
+  </head>
+
+  <body>
+
+            <h2>Publications</h2>
+            <% if (!publicationsList.length) { %>
+                <p>No results</p>
+            <% } else { %>
+                <table id="publicationsList">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Owner</th>
+                            <th>Product</th>
+                            <th>Description</th>
+                            <th>Image</th>
+                            <th>Posted At</th>
+                            <th colspan="2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% publicationsList.forEach((publication) => { %>
+                            <tr>
+                                <td><%- publication.title %></td>
+                                <td><%- publication.userId %></td>
+                                <td><%- publication.productId %></td>
+                                <td><%- publication.description %></td>
+                                <td><%- publication.image %></td>
+                                <td><%- publication.createdAt %></td>
+                                <td><a href="<%- showPublicationPath(publication) %>">Show</a></td>
+                                <td><a href="<%- editPublicationPath(publication) %>">Edit</a></td>
+                                <td>
+                                    <form action="<%- deletePublicationPath(publication) %>" method="POST">
+                                        <input type="hidden" name="_method" value="delete"/>
+                                        <input type = "submit" value="Delete"/>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            <% } %>
+  </body>
+</html>
